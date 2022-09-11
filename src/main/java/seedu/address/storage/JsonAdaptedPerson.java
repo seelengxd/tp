@@ -29,7 +29,6 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-
     private final String remark;
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -108,6 +107,9 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
