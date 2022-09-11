@@ -19,7 +19,7 @@ public class Remark {
      * @param remark A valid remark.
      */
     public Remark(String remark) {
-        requireNonNull(remark);
+//        requireNonNull(remark);
         value = remark;
     }
 
