@@ -292,7 +292,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Reset selected customer to first customer, if there is one.
+     * Resets selected customer to first customer, if there is one.
      */
     public void resetSelectedCustomer() {
         if (filteredCustomers.size() == 0) {
@@ -324,7 +324,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Reset selected commission to first commission, if there is one.
+     * Resets selected commission to first commission, if there is one.
      */
     public void resetSelectedCommission() {
         if (getFilteredCommissionList().size() == 0) {

@@ -45,9 +45,9 @@ public class DeleteCustomerCommand extends Command {
         Customer selectedCustomer = model.getSelectedCustomer().getValue();
         Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCustomer(customerToDelete);
-        model.resetSelectedCustomer();
-        if (!model.isSameCustomerAsSelectedCustomer(customerToDelete)) {
-            model.selectCustomer(selectedCustomer);
+
+        if (model.isSameCustomerAsSelectedCustomer(customerToDelete)) {
+            model.resetSelectedCustomer();
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete));
