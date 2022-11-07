@@ -221,12 +221,7 @@ public class ModelManager implements Model {
     public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
         filteredCustomers.setPredicate(predicate);
-        if (filteredCustomers.size() == 0) {
-            selectCustomer(null);
-        } else if (hasSelectedCustomer() && filteredCustomers.stream()
-                .noneMatch(selectedCustomer.getValue()::isSameCustomer)) {
-            selectCustomer(filteredCustomers.get(0));
-        }
+        resetSelectedCustomer();
     }
 
     @Override
@@ -253,12 +248,7 @@ public class ModelManager implements Model {
     public void updateFilteredCommissionList(Predicate<Commission> predicate) {
         requireAllNonNull(getFilteredCommissionList(), predicate);
         getFilteredCommissionList().setPredicate(predicate);
-        if (getFilteredCommissionList().size() == 0) {
-            selectCommission(null);
-        } else if (hasSelectedCommission() && getFilteredCommissionList().stream()
-                .noneMatch(selectedCommission.getValue()::isSameCommission)) {
-            selectCommission(getFilteredCommissionList().get(0));
-        }
+        resetSelectedCommission();
     }
 
     //=========== Filtered Commission List Statistic Aggregator ==================================================
@@ -301,6 +291,18 @@ public class ModelManager implements Model {
                 .map(selectedCustomer -> selectedCustomer.isSameCustomer(customer)).orElse(false);
     }
 
+    /**
+     * Reset selected customer to first customer, if there is one.
+     */
+    public void resetSelectedCustomer() {
+        if (filteredCustomers.size() == 0) {
+            selectCustomer(null);
+        } else if (hasSelectedCustomer() && filteredCustomers.stream()
+                .noneMatch(selectedCustomer.getValue()::isSameCustomer)) {
+            selectCustomer(filteredCustomers.get(0));
+        }
+    }
+
     //=========== Selected Commission =============================================================
 
     @Override
@@ -319,6 +321,18 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSelectedCommission() {
         return getSelectedCommission().getValue() != null;
+    }
+
+    /**
+     * Reset selected commission to first commission, if there is one.
+     */
+    public void resetSelectedCommission() {
+        if (getFilteredCommissionList().size() == 0) {
+            selectCommission(null);
+        } else if (hasSelectedCommission() && getFilteredCommissionList().stream()
+                .noneMatch(selectedCommission.getValue()::isSameCommission)) {
+            selectCommission(getFilteredCommissionList().get(0));
+        }
     }
 
     @Override

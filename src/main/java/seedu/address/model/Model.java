@@ -219,4 +219,8 @@ public interface Model {
     GuiTab getSelectedTab();
 
     boolean isSameCustomerAsSelectedCustomer(Customer customer);
+
+    void resetSelectedCommission();
+
+    void resetSelectedCustomer();
 }

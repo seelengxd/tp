@@ -46,6 +46,7 @@ public class DeleteCommissionCommand extends Command {
         Customer customer = commissionToDelete.getCustomer();
         model.removeCommission(customer, commissionToDelete);
         model.selectTab(GuiTab.COMMISSION);
+        model.resetSelectedCommission();
         if (selectedCommission != null && !selectedCommission.isSameCommission(commissionToDelete)) {
             model.selectCommission(selectedCommission);
         } else {
