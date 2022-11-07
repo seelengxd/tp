@@ -124,7 +124,12 @@ public class EditCommissionCommand extends Command {
         }
 
         model.setCommission(selectedCustomer, commissionToEdit, editedCommission);
-        model.selectCommission(editedCommission);
+        if (lastShownList.contains(editedCommission)) {
+            model.selectCommission(editedCommission);
+        } else {
+            model.resetSelectedCommission();
+        }
+
 
         model.selectTab(GuiTab.COMMISSION);
         return new CommandResult(String.format(MESSAGE_EDIT_COMMISSION_SUCCESS, editedCommission));
